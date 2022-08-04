@@ -1,42 +1,5 @@
 version: '3.9'
 services:
-  frontend:
-    container_name: app_frontend
-    build: ./front-end
-    ports:
-      - 3000:3000
-    working_dir: /app/frontend
-    depends_on:
-      backend:
-        condition: service_healthy
-
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3000"]
-      timeout: 10s
-      retries: 5
-
-  backend:
-    container_name: app_backend
-    build: ./back-end
-    ports:
-      - 3001:3001
-    working_dir: /app/backend
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      - APP_PORT=3001
-      - JWT_SECRET=secret_key
-      - DB_USER=root
-      - DB_PASS=123456
-      - DB_HOST=db
-      - DB_PORT=3306
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3001"]
-      timeout: 10s
-      retries: 5
-    volumes:
-      - ./back-end:/app/back-end
   db:
     image: mysql:8.0.21
     container_name: db
