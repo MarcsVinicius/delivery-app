@@ -5,6 +5,6 @@ const loginService = async (email) => {
 }
 
 module.exports = {
-  userLogin,
+  loginService,
 };
 
