@@ -17,7 +17,10 @@ module.exports = {
       url_image: {
         type: Sequelize.STRING
       },
-    });
+    },{
+      timestamps: false,
+    }
+    );
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Products');
