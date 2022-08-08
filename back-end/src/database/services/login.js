@@ -1,10 +1,11 @@
-const { User } = require('../models')
+const { User } = require('../models');
+const { createToken, decodeToken } = require('../../utils/JWT');
+const md5 = require('md5');
 
 const loginService = async (email) => {
   const user = await User.findOne({ where: { email } });
-
   return user;
-}
+};
 
 const loginProcess = async (email) => {
   const user = await loginService(email);
@@ -13,22 +14,28 @@ const loginProcess = async (email) => {
     role: user.role,
   };
 
-  const token = JWT.createToken(payload); // o payload deve ser um objeto;
-
-  return { token };
+  const token = createToken(payload);
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    token,
+  };
 }
 
 const verifyToken = (auth) => {
-  const code = JWT.decodeToken(auth);
+  const code = decodeToken(auth);
 
   return code;
-}
+};
 
 const encryptor = async (password, email) => {
   const user = await User.findOne({ where: { email } });
 
   if (user) {
-    return encryptor.compare(password, user.password);
+   const encodedPassword = md5(password);
+   if (encodedPassword === user.password) return true;
   }
 }
 

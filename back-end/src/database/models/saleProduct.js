@@ -5,4 +5,4 @@ const SalesProducts = (sequelize, DataTypes) => {
   return SalesProduct;
 };
 
-module.exports = SalesProduct;
+module.exports = SalesProducts;
