@@ -1,8 +1,18 @@
 const express = require('express');
-const { loginController } = require('../../database/controllers/login');
+const {
+  loginController,
+  validateRole,
+} = require('../../database/controllers/login');
+
+const {
+  // isValidToken,
+  isValidEmail,
+  isValidPassword,
+} = require('../../middlewares/loginMiddleware');
 
 const loginRouter = express.Router();
 
-loginRouter.post('/', loginController);
+loginRouter.post('/', isValidEmail, isValidPassword, loginController);
+loginRouter.post('/validate', validateRole);
 
 module.exports = loginRouter;
