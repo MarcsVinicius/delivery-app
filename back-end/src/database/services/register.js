@@ -1,4 +1,6 @@
+const { createToken } = require('../../utils/JWT');
 const { User } = require('../models');
+const md5 = require('md5');
 
 const registerService = async (email) => {
   const user = await User.findOne({ where: { email } });
@@ -6,18 +8,22 @@ const registerService = async (email) => {
 };
 
 const registerProcess = async (dataBody) => {
-  const newUser = await User.create(dataBody);
+  const { name, email, password, role } = dataBody;
+
+  await User.create(dataBody);
   const payload = {
-    email: dataBody.email,
-    role: dataBody.role,
+    email,
+    role,
   };
 
   const token = createToken(payload);
-  return newUser = {
-    id,
-    name: dataBody.name,
-    email: dataBody.email,
-    role: dataBody.role,
+  const encode = md5(password);
+
+  return {
+    name,
+    email,
+    password: encode,
+    role,
     token,
   };
 }
