@@ -1,9 +1,12 @@
 const Product = (sequelize, DataTypes) => {
-  const SalesProduct = sequelize.define("Product", {
+  const Product = sequelize.define("Product", {
     name: DataTypes.STRING,
     price: DataTypes.REAL,
     url_image: DataTypes.STRING,
-  });
+  }, {
+    timestamps: false,
+  }
+  );
   return Product;
 };
 
