@@ -10,7 +10,7 @@ const registerService = async (email) => {
 const registerProcess = async (dataBody) => {
   const { name, email, password, role } = dataBody;
 
-  await User.create(dataBody);
+  const newUser = await User.create({ ...dataBody });
   const payload = {
     email,
     role,
@@ -20,6 +20,7 @@ const registerProcess = async (dataBody) => {
   const encode = md5(password);
 
   return {
+    id: newUser.id,
     name,
     email,
     password: encode,

@@ -5,7 +5,6 @@ const message1 = { message: 'All fields must be filled' };
 const message2 = { message: 'Token must be a valid token' };
 const message3 = { message: 'The password must be at least 6 characters long' };
 
-
 const isValidEmail = (req, res, next) => {
   const regex = /\S+@\S+\.\S+/;
   const { email } = req.body;

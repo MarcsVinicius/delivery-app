@@ -9,7 +9,7 @@ const isValidRegisterName = (req, _res, next) => {
   const { name } = req.body;
 
   const { error } = displayNameSchema.validate({ name });
-  if (error) next({ status: 400, message: 'The name length must be at least 8 characters long' });
+  if (error) next({ status: 400, message: 'The name length must be at least 12 characters long' });
   
   next();
 };
@@ -27,7 +27,9 @@ const isValidRegisterPassword = (req, _res, next) => {
   const { password } = req.body;
 
   const { error } = passwordSchema.validate({ password });
-  if (error) next({ status: 400, message: 'The password length must be at least 6 characters long' });
+  if (error) {
+    next({ status: 400, message: 'The password length must be at least 6 characters long' });
+  }
   
   next();
 };
