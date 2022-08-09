@@ -2,8 +2,13 @@ const { createToken } = require('../../utils/JWT');
 const { User } = require('../models');
 const md5 = require('md5');
 
-const registerService = async (email) => {
+const registerEmail = async (email) => {
   const user = await User.findOne({ where: { email } });
+  return user;
+};
+
+const registerName = async (name) => {
+  const user = await User.findOne({ where: { name } });
   return user;
 };
 
@@ -31,6 +36,7 @@ const registerProcess = async (dataBody) => {
 
 module.exports = {
   registerProcess,
-  registerService,
+  registerEmail,
+  registerName,
 };
 
