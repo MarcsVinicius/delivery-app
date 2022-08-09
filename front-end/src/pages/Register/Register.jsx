@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { MIN_LENGTH_PASSWORD } from '../../helpers/constants';
+import { useHistory } from 'react-router-dom';
+import { MIN_LENGTH_PASSWORD, MIN_LENGTH_NAME } from '../../helpers/constants';
 
 export default function Login() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const history = useHistory();
   const fetchRegister = async (userEmail, userPassword, userName) => {
@@ -28,15 +29,15 @@ export default function Login() {
   useEffect(() => {
     const isEmailValid = /\w+@+\w+\.+\w/.test(email);
     const isPasswordValid = password.length >= MIN_LENGTH_PASSWORD;
+    const isNameValid = name.length >= MIN_LENGTH_NAME;
 
-    setIsButtonDisabled(!(isEmailValid && isPasswordValid));
-  }, [email, password]);
+    setIsButtonDisabled(!(isEmailValid && isPasswordValid && isNameValid));
+  }, [email, password, name]);
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setErrorMessage('');
-
-    const loginResponse = await fetchRegister(email, password);
+    const loginResponse = await fetchRegister(email, password, name);
 
     if (loginResponse.message) {
       setErrorMessage(loginResponse.message);
@@ -45,7 +46,7 @@ export default function Login() {
 
     localStorage.setItem('userData', JSON.stringify(loginResponse));
 
-    history.push('/products');
+    history.push('/customer/products');
   };
 
   return (
@@ -98,12 +99,13 @@ export default function Login() {
         >
           Registrar
         </button>
-        <Link
-          to="/login"
-        >
-          Já possui uma conta?
-        </Link>
+
       </form>
+      <span
+        data-testid="common_register__element-invalid_register"
+      >
+        {errorMessage}
+      </span>
     </section>
   );
 }
