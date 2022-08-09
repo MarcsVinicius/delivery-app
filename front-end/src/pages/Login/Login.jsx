@@ -41,7 +41,7 @@ function Login() {
 
     localStorage.setItem('userData', JSON.stringify(loginResponse));
 
-    history.push('/products');
+    history.push('/customer/products');
   };
 
   return (
