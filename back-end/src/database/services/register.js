@@ -14,8 +14,8 @@ const registerName = async (name) => {
 
 const registerProcess = async (dataBody) => {
   const { name, email, password } = dataBody;
-
-  const newUser = await user.create({ ...dataBody, role: 'customer' });
+  const encode = md5(password);
+  const newUser = await user.create({ ...dataBody, password: encode, role: 'customer' });
 
   const payload = {
     email,
@@ -23,7 +23,6 @@ const registerProcess = async (dataBody) => {
   };
 
   const token = createToken(payload);
-  const encode = md5(password);
 
   return {
     id: newUser.id,
