@@ -13,12 +13,13 @@ const registerName = async (name) => {
 };
 
 const registerProcess = async (dataBody) => {
-  const { name, email, password, role } = dataBody;
+  const { name, email, password } = dataBody;
 
-  const newUser = await User.create({ ...dataBody });
+  const newUser = await User.create({ ...dataBody, role: 'customer' });
+
   const payload = {
     email,
-    role,
+    role: 'customer'
   };
 
   const token = createToken(payload);
@@ -29,7 +30,7 @@ const registerProcess = async (dataBody) => {
     name,
     email,
     password: encode,
-    role,
+    role: 'customer',
     token,
   };
 }
