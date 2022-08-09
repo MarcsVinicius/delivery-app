@@ -1,25 +1,25 @@
-const { User } = require('../models');
+const { user } = require('../models');
 const { createToken, decodeToken } = require('../../utils/JWT');
 const md5 = require('md5');
 
 const loginService = async (email) => {
-  const user = await User.findOne({ where: { email } });
-  return user;
+  const foundUser = await user.findOne({ where: { email } });
+  return foundUser;
 };
 
 const loginProcess = async (email) => {
-  const user = await loginService(email);
+  const foundUser = await loginService(email);
   const payload = {
-    email: user.email,
-    role: user.role,
+    email: foundUser.email,
+    role: foundUser.role,
   };
 
   const token = createToken(payload);
   return {
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    role: user.role,
+    id: foundUser.id,
+    name: foundUser.name,
+    email: foundUser.email,
+    role: foundUser.role,
     token,
   };
 }
@@ -31,11 +31,11 @@ const verifyToken = (auth) => {
 };
 
 const encryptor = async (password, email) => {
-  const user = await User.findOne({ where: { email } });
+  const foundUser = await user.findOne({ where: { email } });
 
-  if (user) {
+  if (foundUser) {
    const encodedPassword = md5(password);
-   if (encodedPassword === user.password) return true;
+   if (encodedPassword === foundUser.password) return true;
   }
 }
 

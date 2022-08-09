@@ -41,7 +41,7 @@ function Login() {
 
     localStorage.setItem('userData', JSON.stringify(loginResponse));
 
-    history.push('/home');
+    history.push('/customer/products');
   };
 
   return (
@@ -78,11 +78,13 @@ function Login() {
           Login
         </button>
 
-        <Link
-          to="/register"
-          data-testid="common_login__button-register"
-        >
-          Não possui uma conta?
+        <Link to="/register">
+          <button
+            data-testid="common_login__button-register"
+            type="button"
+          >
+            Não possui uma conta?
+          </button>
         </Link>
 
       </form>

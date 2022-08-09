@@ -1,5 +1,5 @@
 const Sale = (sequelize, DataTypes) => {
-  const Sale = sequelize.define("Sale", {
+  const Sale = sequelize.define("sale", {
     total_price: DataTypes.REAL,
     delivery_address: DataTypes.STRING,
     delivery_number: DataTypes.STRING,

@@ -8,7 +8,7 @@ const loginController = async (req, res, _next) => {
   const { email } = req.body;
 
   const user = await loginProcess(email);
-  if (!user) return res.status(404).json({ message: 'Not found' });
+  if (!user) return res.status(404).json({ message: 'Incorrect email or password' });
 
   return res.status(200).json(user);
 };
