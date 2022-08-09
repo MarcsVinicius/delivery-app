@@ -1,8 +1,9 @@
 const { encryptor, verifyToken } = require('../database/services/login');
 
-const message = { message: 'Incorrect email or password' };
+const message = { message: 'Not found' };
 const message1 = { message: 'All fields must be filled' };
 const message2 = { message: 'Token must be a valid token' };
+const message3 = { message: 'The password must be at least 6 characters long' };
 
 const isValidEmail = (req, res, next) => {
   const regex = /\S+@\S+\.\S+/;
@@ -24,10 +25,12 @@ const isValidPassword = async (req, res, next) => {
     return res.status(400).json(message1);
   }
 
+  if (password.length < 6) return res.status(400).json(message3);
+
   const confirmUser = await encryptor(password, email);
 
   if (!confirmUser) {
-    return res.status(401).json(message);
+    return res.status(404).json(message);
   }
 
   next();
