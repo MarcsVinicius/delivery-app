@@ -1,24 +1,25 @@
 const { createToken } = require('../../utils/JWT');
-const { User } = require('../models');
+const { user } = require('../models');
 const md5 = require('md5');
 
 const registerEmail = async (email) => {
-  const user = await User.findOne({ where: { email } });
-  return user;
+  const foundUser = await user.findOne({ where: { email } });
+  return foundUser;
 };
 
 const registerName = async (name) => {
-  const user = await User.findOne({ where: { name } });
-  return user;
+  const foundUser = await user.findOne({ where: { name } });
+  return foundUser;
 };
 
 const registerProcess = async (dataBody) => {
-  const { name, email, password, role } = dataBody;
+  const { name, email, password } = dataBody;
 
-  const newUser = await User.create({ ...dataBody });
+  const newUser = await user.create({ ...dataBody, role: 'customer' });
+
   const payload = {
     email,
-    role,
+    role: 'customer'
   };
 
   const token = createToken(payload);
@@ -29,7 +30,7 @@ const registerProcess = async (dataBody) => {
     name,
     email,
     password: encode,
-    role,
+    role: 'customer',
     token,
   };
 }
