@@ -39,7 +39,7 @@ function Login() {
       return;
     }
 
-    localStorage.setItem('userData', JSON.stringify(loginResponse));
+    localStorage.setItem('user', JSON.stringify(loginResponse));
 
     history.push('/customer/products');
   };
