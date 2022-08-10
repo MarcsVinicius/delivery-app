@@ -27,6 +27,7 @@ export default function CostumerProducts({ name, price, urlImg, id }) {
   const handleChange = (e) => {
     setQty(e.target.value);
   };
+
   return (
     <section>
       <img
@@ -42,8 +43,7 @@ export default function CostumerProducts({ name, price, urlImg, id }) {
       <h4
         data-testid={ `customer_products__element-card-price-${id}` }
       >
-        {`R$ ${price.toFixed(2).replace('.', ',')}`}
-
+        {`R$ ${Number(price).toFixed(2).replace('.', ',')}`}
       </h4>
       <div>
         <button
