@@ -7,10 +7,10 @@ const registerController = async (req, res, _next) => {
   const dataBody = req.body;
 
   const isUserRegistered = await registerValidate();
-  const filteredEmail = isUserRegistered.filter((e) => e.email === dataBody.email);
+  const filteredEmail = isUserRegistered.find((e) => e.email === dataBody.email);
   if(filteredEmail) return res.status(409).json({ message: 'The email already registered' });
 
-  const filteredName = isUserRegistered.filter((e) => e.name === dataBody.name);
+  const filteredName = isUserRegistered.find((e) => e.name === dataBody.name);
   if(filteredName) return res.status(409).json({ message: 'The name already registered' });
 
   const newUser = await registerProcess(dataBody);
