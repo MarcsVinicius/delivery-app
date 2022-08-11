@@ -22,10 +22,9 @@ module.exports = {
       }
     }, {
       timestamps: false,
-    }
-    );
+    });
   },
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface, _Sequelize) => {
     await queryInterface.dropTable('users');
   }
 };
