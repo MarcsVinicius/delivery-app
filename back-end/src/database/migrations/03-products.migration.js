@@ -14,9 +14,10 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL(4,2)
       },
-      url_image: {
-        type: Sequelize.STRING
-      },
+      urlImage: {
+        type: Sequelize.STRING,
+        field: 'url_image',
+      }
     },{
       timestamps: false,
     }
