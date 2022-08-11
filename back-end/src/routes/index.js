@@ -12,6 +12,7 @@ router.use('/login', loginRouter);
 router.use('/login/validate', loginRouter);
 router.use('/register', registerRouter);
 router.use('/products', productsRouter);
+router.use('/images', express.static(`${__dirname}/../../public`)); // rota das imagens de produtos
 router.use('/users', usersRouter);
 router.use('/sales', salesRouter);
 
