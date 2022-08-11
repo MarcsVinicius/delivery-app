@@ -4,6 +4,8 @@ const loginRouter = require('./login/index');
 const productsRouter = require('./products');
 const registerRouter = require('./register');
 const sellerRouter = require('./seller');
+const usersRouter = require('./users');
+const salesRouter = require('./sales');
 
 const router = express.Router();
 
@@ -12,5 +14,9 @@ router.use('/login/validate', loginRouter);
 router.use('/register', registerRouter);
 router.use('/products', productsRouter);
 router.use('/seller/:id/orders', sellerRouter);
+
+router.use('/images', express.static(`${__dirname}/../../public`)); // rota das imagens de produtos
+router.use('/users', usersRouter);
+router.use('/sales', salesRouter);
 
 module.exports = router;
