@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       price: {
-        type: Sequelize.DECIMAL(10,2)
+        type: Sequelize.DECIMAL(4,2)
       },
       url_image: {
         type: Sequelize.STRING
@@ -22,7 +22,7 @@ module.exports = {
     }
     );
   },
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface, _Sequelize) => {
     await queryInterface.dropTable('products');
   }
 };
