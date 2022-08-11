@@ -1,21 +1,33 @@
-const { sale } = require('../models');
+const { sale, user } = require('../models');
 const today = new Date(Date.now())
 const saleDate = today.toUTCString();
 
-const createSale = async (dataBody) => {
-  
+const userLogged = async (email) => {
+  const client = await user.findOne({ where: { email } });
+  return client;
+};
+
+const responsibleSeller = async (name) => {
+  const seller = await user.findOne({ where: { name } });
+  return seller;
+}
+
+const createSale = async (dataBody, userId, sellerId) => {
   const newSale = await sale.create({
-    ...dataBody,
+    userId: userId,
+    sellerId: sellerId,
+    totalPrice: dataBody.totalPrice,
+    deliveryAddress: dataBody.deliveryAddress,
+    deliveryNumber: dataBody.deliveryNumber,
+    status: dataBody.deliveryNumber,
     saleDate,
   });
 
-  return {
-    id: newSale.id,
-    ...dataBody,
-    saleDate,
-  };
+  return newSale;
 };
 
 module.exports = {
   createSale,
+  userLogged,
+  responsibleSeller,
 };
