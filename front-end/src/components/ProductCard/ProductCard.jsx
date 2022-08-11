@@ -9,7 +9,7 @@ function ProductCard({ productData }) {
   const {
     id,
     name,
-    url_image: image,
+    urlImage,
     price,
   } = productData;
 
@@ -55,9 +55,10 @@ function ProductCard({ productData }) {
 
     <section>
       <img
-        src={ image }
+        src={ urlImage }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
         alt={ `Imagem do produto, ${name}` }
+        style={ { width: '100px' } }
       />
 
       <h4 data-testid={ `customer_products__element-card-title-${id}` }>
