@@ -1,15 +1,14 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import propTypes from 'prop-types';
 import AppContext from './AppContext';
 
 function Provider({ children }) {
   const [savedProducts, setSavedProducts] = useState([]);
 
-  const value = {
+  const value = useMemo(() => ({
     savedProducts,
     setSavedProducts,
-  };
+  }), [savedProducts]);
 
   return (
     <AppContext.Provider value={ value }>
