@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import AppContext from '../../context/AppContext';
 
 function ProductCard({ productData }) {
   const [quantity, setQuantity] = useState(0);
+  const { setSavedProducts } = useContext(AppContext);
 
   const {
     id,
@@ -18,6 +20,36 @@ function ProductCard({ productData }) {
   const handleChange = ({ target: { value } }) => {
     if (value >= 0) setQuantity(+value);
   };
+
+  // carrega os dados do produtos do localStorage
+  useEffect(() => {
+    const savedProducts = JSON.parse(localStorage.getItem('products')) || [];
+
+    const foundProduct = savedProducts.find((product) => product.id === id);
+
+    if (foundProduct) {
+      setQuantity(foundProduct.quantity);
+      return;
+    }
+
+    const currentProduct = {
+      ...productData,
+      quantity: 0,
+    };
+
+    localStorage.setItem('products', JSON.stringify([...savedProducts, currentProduct]));
+  }, [id, productData]);
+
+  // atualiza o localStorage quando muda a quantidade
+  useEffect(() => {
+    const savedProducts = JSON.parse(localStorage.getItem('products')) || [];
+    const index = savedProducts.findIndex((product) => product.id === id);
+
+    savedProducts[index] = { ...productData, quantity };
+
+    localStorage.setItem('products', JSON.stringify(savedProducts));
+    setSavedProducts(savedProducts);
+  }, [id, productData, setSavedProducts, quantity]);
 
   return (
 
