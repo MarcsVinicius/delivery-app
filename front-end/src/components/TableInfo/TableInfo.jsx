@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 export default function TableInfo({ orderId, name, quantity, price, removeCallBack }) {
   return (
     <tr>
-      <td>
+      <td
+        data-testid={
+          `customer_checkout__element-order-table-item-number-${orderId - 1}`
+        }
+      >
         {orderId}
       </td>
       <td

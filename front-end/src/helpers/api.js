@@ -4,4 +4,8 @@ export const fetchProducts = async () => {
   return products;
 };
 
-export const temp = '';
+export const fetchSellers = async () => {
+  const response = await fetch(`${process.env.REACT_APP_BASE_URL}/users`);
+  const products = await response.json();
+  return products;
+};
