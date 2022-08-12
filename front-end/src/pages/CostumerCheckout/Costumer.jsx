@@ -57,16 +57,20 @@ export default function CostumerCheckout() {
         </thead>
         <tbody>
           {products !== undefined && products !== null && products.length !== 0
-            ? products.map((product, i) => (
-              <TableInfo
-                key={ i }
-                orderId={ i + 1 }
-                name={ product.name }
-                quantity={ product.quantity }
-                price={ product.price }
-                removeCallBack={ handleCallback }
-              />
-            ))
+            ? products.map((product, i) => {
+              if (product.quantity > 0) {
+                return (<TableInfo
+                  key={ i }
+                  orderId={ i + 1 }
+                  name={ product.name }
+                  quantity={ product.quantity }
+                  price={ product.price }
+                  removeCallBack={ handleCallback }
+                  index={ i }
+                />);
+              }
+              return null;
+            })
             : null}
         </tbody>
       </table>
