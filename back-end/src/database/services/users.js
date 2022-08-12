@@ -1,11 +1,11 @@
 const { user } = require('../models');
 
-const findAllSellers = async (seller) => {
-  const sellers = await user.findAll({ where: { role: seller } });
+const findAllUsers = async (role) => {
+  const users = await user.findAll({ where: { role: role } });
 
-  return sellers;
+  return users;
 };
 
 module.exports = {
-  findAllSellers,
+  findAllUsers,
 };
