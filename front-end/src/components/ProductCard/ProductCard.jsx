@@ -66,7 +66,7 @@ function ProductCard({ productData }) {
       </h4>
 
       <h4 data-testid={ `customer_products__element-card-price-${id}` }>
-        {price.toFixed(2).replace('.', ',')}
+        {price.replace('.', ',')}
       </h4>
 
       <div>
