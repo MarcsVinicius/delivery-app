@@ -1,7 +1,10 @@
-const { User, Sale } = require('../models');
+const { sale } = require('../models');
 
 const sellerOrder = async (id) => {
-  const sellerOrders = await Sale.findAll({ where: { id } })
+  const sellerOrders = await sale.findAll(
+    { where: { sellerId: id } }
+  );
+  
   return sellerOrders;
 }
 

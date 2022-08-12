@@ -3,6 +3,6 @@ const sellerController = require('../../database/controllers/seller.controller')
 
 const sellerRouter = express.Router();
 
-sellerRouter.get('/', sellerController.sellerOrder);
+sellerRouter.get('/:id/orders', sellerController.sellerOrder);
 
 module.exports = sellerRouter;
