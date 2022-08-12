@@ -1,25 +1,27 @@
-const { sale, user } = require('../models');
+const { sale, saleProduct } = require('../models');
 const today = new Date(Date.now())
 const saleDate = today.toUTCString();
 
-const userLogged = async (email) => {
-  const client = await user.findOne({ where: { email } });
-  return client;
+const seedSalesProducts = async (dataBody, newSale) => {
+  const products = dataBody.products;
+
+  products.forEach( async (e) => {
+      await saleProduct.create({
+        quantity: e.quantity,
+        saleId: newSale.id,
+        productId: e.productId,
+      })
+    });
 };
 
-const responsibleSeller = async (name) => {
-  const seller = await user.findOne({ where: { name } });
-  return seller;
-}
-
-const createSale = async (dataBody, userId, sellerId) => {
+const createSale = async (dataBody) => {
   const newSale = await sale.create({
-    userId: userId,
-    sellerId: sellerId,
+    userId: dataBody.userId,
+    sellerId: dataBody.sellerId,
     totalPrice: dataBody.totalPrice,
     deliveryAddress: dataBody.deliveryAddress,
     deliveryNumber: dataBody.deliveryNumber,
-    status: dataBody.deliveryNumber,
+    status: 'Pendente',
     saleDate,
   });
 
@@ -28,6 +30,5 @@ const createSale = async (dataBody, userId, sellerId) => {
 
 module.exports = {
   createSale,
-  userLogged,
-  responsibleSeller,
+  seedSalesProducts,
 };

@@ -1,16 +1,16 @@
-const { createSale, userLogged, responsibleSeller } = require('../services/sales')
+const {
+  createSale,
+  seedSalesProducts,
+} = require('../services/sales')
 
 const createSaleController = async (req, res, _next) => {
   const dataBody = req.body;
-  // const { email } = req.params;
 
-  const email = "zebirita@email.com"
-
-  const Client = await userLogged(email);
-  const seller = await responsibleSeller(dataBody.sellerName);
-  const newSale = await createSale(dataBody, Client.id, seller.id);
+  const newSale = await createSale(dataBody);
+  await seedSalesProducts(dataBody, newSale);
 
   return res.status(201).json(newSale);
+
 };
 
 module.exports = {

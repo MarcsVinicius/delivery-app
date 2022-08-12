@@ -4,6 +4,6 @@ const { usersController } = require('../../database/controllers/users');
 
 const usersRouter = express.Router();
 
-usersRouter.get('/', usersController);
+usersRouter.get('/:role', usersController);
 
 module.exports = usersRouter;
