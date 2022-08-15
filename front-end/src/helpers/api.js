@@ -5,7 +5,7 @@ export const fetchProducts = async () => {
 };
 
 export const fetchSellers = async () => {
-  const response = await fetch(`${process.env.REACT_APP_BASE_URL}/users`);
+  const response = await fetch(`${process.env.REACT_APP_BASE_URL}/users/seller`);
   const products = await response.json();
   return products;
 };

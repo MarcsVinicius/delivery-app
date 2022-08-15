@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { fetchSellers } from '../../helpers/api';
 import Navbar from '../../components/Navbar/Navbar';
 import TableInfo from '../../components/TableInfo/TableInfo';
@@ -10,6 +11,7 @@ export default function CostumerCheckout() {
   const [selectedSeller, setSelectedSeller] = useState(0);
   const [address, setAddress] = useState('');
   const [addressNumber, setAddressNumber] = useState('');
+  const history = useHistory();
   const handleCallback = async (_e, productName) => {
     setProducts((prevState) => {
       const result = prevState.filter((product) => product.name !== productName);
@@ -22,10 +24,12 @@ export default function CostumerCheckout() {
     * product.price);
     return res.reduce((acc, value) => acc + value).toFixed(2);
   };
-  const fetchSeller = async () => {
-    await fetch(`${process.env.REACT_APP_BASE_URL}/sales`, {
+  const submitSale = async (e) => {
+    e.preventDefault();
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const res = await fetch(`${process.env.REACT_APP_BASE_URL}/sales`, {
       method: 'post',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', token },
       body: JSON.stringify({
         totalPrice: calculateTotal(),
         deliveryAddress: address,
@@ -33,12 +37,17 @@ export default function CostumerCheckout() {
         status: 'pendente',
         userId: 3,
         sellerId: selectedSeller.id,
+        products,
       }),
     });
+    const resData = await res.json();
+    history.push(`/customer/orders/${resData.id}`);
   };
 
   useEffect(() => {
-    fetchSellers().then((response) => setSellers(response));
+    if (sellers.length === 0) {
+      fetchSellers().then((response) => setSellers(response));
+    }
     setSelectedSeller(sellers[0]);
   }, [sellers]);
   return (
@@ -83,7 +92,7 @@ export default function CostumerCheckout() {
 
           </h1>)
         : <h1>Nenhum produto inserido</h1>}
-      <div>
+      <form onSubmit={ submitSale }>
         <label htmlFor="sellers">
           P.Vendedora Responsável:
           <select
@@ -109,6 +118,7 @@ export default function CostumerCheckout() {
             id="endereco"
             type="text"
             placeholder="Travessa Terceira da Castanheira, bairro murici"
+            required
           />
         </label>
         <label htmlFor="numero">
@@ -119,17 +129,17 @@ export default function CostumerCheckout() {
             input="numero"
             type="text"
             placeholder="777"
+            required
           />
         </label>
-      </div>
-      <button
-        data-testid="customer_checkout__button-submit-order"
-        type="button"
-        onClick={ fetchSeller }
-      >
-        Finalizar pedido
+        <button
+          data-testid="customer_checkout__button-submit-order"
+          type="submit"
+        >
+          Finalizar pedido
 
-      </button>
+        </button>
+      </form>
     </section>
   );
 }
