@@ -4,14 +4,16 @@ import { fetchSellers } from '../../helpers/api';
 import Navbar from '../../components/Navbar/Navbar';
 import TableInfo from '../../components/TableInfo/TableInfo';
 
-export default function CostumerCheckout() {
+function Checkout() {
   const [products, setProducts] = useState(localStorage.getItem('products') === null
     ? [] : JSON.parse(localStorage.getItem('products')));
+
   const [sellers, setSellers] = useState([]);
   const [selectedSeller, setSelectedSeller] = useState(0);
   const [address, setAddress] = useState('');
   const [addressNumber, setAddressNumber] = useState('');
   const history = useHistory();
+
   const handleCallback = async (_e, productName) => {
     setProducts((prevState) => {
       const result = prevState.filter((product) => product.name !== productName);
@@ -19,11 +21,13 @@ export default function CostumerCheckout() {
       return result;
     });
   };
+
   const calculateTotal = () => {
     const res = products.map((product) => product.quantity
     * product.price);
     return res.reduce((acc, value) => acc + value).toFixed(2);
   };
+
   const submitSale = async (e) => {
     e.preventDefault();
     const { token } = JSON.parse(localStorage.getItem('user'));
@@ -40,6 +44,7 @@ export default function CostumerCheckout() {
         products,
       }),
     });
+
     const resData = await res.json();
     history.push(`/customer/orders/${resData.id}`);
   };
@@ -50,6 +55,7 @@ export default function CostumerCheckout() {
     }
     setSelectedSeller(sellers[0]);
   }, [sellers]);
+
   return (
     <section>
       <Navbar />
@@ -143,3 +149,5 @@ export default function CostumerCheckout() {
     </section>
   );
 }
+
+export default Checkout;
