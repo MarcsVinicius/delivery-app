@@ -35,7 +35,7 @@ export default function CostumerCheckout() {
         deliveryAddress: address,
         deliveryNumber: addressNumber,
         status: 'pendente',
-        userId: 3,
+        userId: JSON.parse(localStorage.getItem('user')).id,
         sellerId: selectedSeller.id,
         products,
       }),

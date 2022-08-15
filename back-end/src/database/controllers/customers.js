@@ -1,4 +1,8 @@
-const { customerOrders, verifyToken } = require('../services/customers');
+const {
+  customerOrders,
+  verifyToken,
+  customerOrderSale,
+} = require('../services/customers');
 
 const customerOrdersController = async (req, res, _next) => {
   try {
@@ -14,6 +18,16 @@ const customerOrdersController = async (req, res, _next) => {
     }
 };
 
+const orderSaleController = async (req, res, _next) => {
+      const { id } = req.params;
+
+      const order = await customerOrderSale(id);
+      if (!order) return res.status(400).json('Order not found!');
+
+      return res.status(200).json(order);
+};
+
 module.exports = {
   customerOrdersController,
+  orderSaleController,
 };

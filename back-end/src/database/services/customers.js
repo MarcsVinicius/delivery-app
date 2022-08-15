@@ -1,5 +1,6 @@
+const { mapedProducts } = require('../../utils/functions');
 const { decodeToken } = require('../../utils/JWT');
-const { sale, user } = require('../models');
+const { sale, user, product } = require('../models');
 
 const verifyToken = (auth) => {
   const code = decodeToken(auth);
@@ -11,9 +12,25 @@ const customerOrders = async (email) => {
   const orders = await sale.findAll({ where: { userId: customer.id }});
   
   return orders;
+};
+
+const customerOrderSale = async (id) => {
+  const order = await sale.findOne({
+    where: { id },
+    include: [
+      { model: product, as: 'products' },
+      { model: user, as: 'users' }
+    ],
+  });
+
+  const saleDetails = mapedProducts(order);
+
+  return saleDetails;
 }
+
 
 module.exports = {
   customerOrders,
   verifyToken,
+  customerOrderSale,
 };
