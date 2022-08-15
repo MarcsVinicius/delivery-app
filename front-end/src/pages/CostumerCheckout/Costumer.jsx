@@ -29,13 +29,13 @@ export default function CostumerCheckout() {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const res = await fetch(`${process.env.REACT_APP_BASE_URL}/sales`, {
       method: 'post',
-      headers: { 'Content-Type': 'application/json', token },
+      headers: { 'Content-Type': 'application/json', authorization: token },
       body: JSON.stringify({
         totalPrice: calculateTotal(),
         deliveryAddress: address,
         deliveryNumber: addressNumber,
         status: 'pendente',
-        userId: 3,
+        userId: JSON.parse(localStorage.getItem('user')).id,
         sellerId: selectedSeller.id,
         products,
       }),
