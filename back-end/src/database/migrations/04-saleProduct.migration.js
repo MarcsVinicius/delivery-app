@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('saleProducts', {
+    await queryInterface.createTable('sales_products', {
       quantity: {
         type: Sequelize.INTEGER
       },
