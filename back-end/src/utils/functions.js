@@ -22,7 +22,19 @@ const mapedProducts = ({ id, saleDate, status, products, users }) => {
     return result;
 };
 
+const setRole = (value) => {
+  let role = '';
+  
+  if (value) {
+    role = value;
+  } else {
+    role = 'customer';
+  }
+  return role;
+};
+
 module.exports = {
   doMath,
   mapedProducts,
+  setRole,
 };
