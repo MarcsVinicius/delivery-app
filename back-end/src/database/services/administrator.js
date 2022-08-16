@@ -1,6 +1,7 @@
 const { createToken } = require('../../utils/JWT');
 const { user } = require('../models');
 const md5 = require('md5');
+const { setRole } = require('../../utils/functions');
 
 const registerAdminValidate = async () => {
   const foundUser = await user.findAll();
@@ -8,15 +9,19 @@ const registerAdminValidate = async () => {
 };
 
 const registerAdminProcess = async (dataBody) => {
-  const { name, email, password } = dataBody;
+  const { name, email, password, role } = dataBody;
+  const userRole = setRole(role);
 
   const encode = md5(password);
-  const newUser = await user.create({ ...dataBody, password: encode, role: 'administrator' });
+  const newUser = await user.create({ ...dataBody, password: encode, role: userRole });
+
 
   const payload = {
     email,
-    role: 'administrator',
+    role: userRole,
   };
+
+
 
   const token = createToken(payload);
 
@@ -25,7 +30,7 @@ const registerAdminProcess = async (dataBody) => {
     name,
     email,
     password: encode,
-    role: 'administrator',
+    role: userRole,
     token,
   };
 }
