@@ -22,7 +22,6 @@ const customerOrderSale = async (id) => {
       { model: user, as: 'users' }
     ],
   });
-
   const saleDetails = mapedProducts(order);
 
   return saleDetails;
@@ -33,4 +32,5 @@ module.exports = {
   customerOrders,
   verifyToken,
   customerOrderSale,
+  mapedProducts,
 };
