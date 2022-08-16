@@ -6,6 +6,7 @@ const registerRouter = require('./register');
 const usersRouter = require('./users');
 const salesRouter = require('./sales');
 const sellerRouter = require('./seller');
+const customerRouter = require('./customers');
 
 const router = express.Router();
 
@@ -17,5 +18,7 @@ router.use('/images', express.static(`${__dirname}/../../public`)); // rota das 
 router.use('/users', usersRouter);
 router.use('/sales', salesRouter);
 router.use('/seller', sellerRouter);
+router.use('/customer', customerRouter);
+// router.use('/orders/:id', customerRouter);
 
 module.exports = router;

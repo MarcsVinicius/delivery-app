@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from '../../context/AppContext';
 
+const LESS_THEN_ZERO = -1;
+
 function ProductCard({ productData }) {
   const [quantity, setQuantity] = useState(0);
   const { setSavedProducts } = useContext(AppContext);
@@ -29,15 +31,7 @@ function ProductCard({ productData }) {
 
     if (foundProduct) {
       setQuantity(foundProduct.quantity);
-      return;
     }
-
-    const currentProduct = {
-      ...productData,
-      quantity: 0,
-    };
-
-    localStorage.setItem('products', JSON.stringify([...savedProducts, currentProduct]));
   }, [id, productData]);
 
   // atualiza o localStorage quando muda a quantidade
@@ -45,7 +39,13 @@ function ProductCard({ productData }) {
     const savedProducts = JSON.parse(localStorage.getItem('products')) || [];
     const index = savedProducts.findIndex((product) => product.id === id);
 
-    savedProducts[index] = { ...productData, quantity };
+    if (index === LESS_THEN_ZERO && quantity > 0) {
+      savedProducts.push({ ...productData, quantity });
+    } else if (quantity > 0) {
+      savedProducts[index] = { ...productData, quantity };
+    } else if (quantity === 0) {
+      savedProducts.splice(index, 1);
+    }
 
     localStorage.setItem('products', JSON.stringify(savedProducts));
     setSavedProducts(savedProducts);
