@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { MIN_LENGTH_PASSWORD } from '../../helpers/constants';
+import verifyToken from '../../helpers/verifyToken';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -8,6 +9,18 @@ function Login() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user) {
+      const isTokenValid = verifyToken(user.token);
+
+      if (isTokenValid) {
+        history.push('/customer/products');
+      }
+    }
+  }, [history]);
 
   useEffect(() => {
     const isEmailValid = /\w+@+\w+\.+\w/.test(email);
