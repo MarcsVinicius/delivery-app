@@ -6,9 +6,9 @@ const doMath = (quantity, price) => {
 const mapedProducts = ({ id, saleDate, status, products, users }) => {
   const product = products.map((e) => ({
       productName: e.name,
-      quantity: e.saleProduct.quantity,
+      quantity: e.salesProduct.quantity,
       unityPrice: e.price,
-      subTotal: doMath(e.saleProduct.quantity, e.price),
+      subTotal: doMath(e.salesProduct.quantity, e.price),
     }));
 
     const result = {
