@@ -1,12 +1,22 @@
-// const express = require('express');
+const express = require('express');
 
-// const {
-//   createAdminController,
-// } = require('../../database/controllers/administrator');
+const {
+  isValidRegisterName,
+  isValidRegisterEmail,
+  isValidRegisterPassword,
+} = require('../../middlewares/registerMiddleware');
+const {
+  registerAdminController,
+} = require('../../database/controllers/administrator');
 
-// const adminRouter = express.Router();
+const adminRouter = express.Router();
 
-// adminRouter.post('/', createAdminController);
-// // customerRouter.get('/admin/manage', orderSaleController);
+adminRouter.post(
+  '/',
+  isValidRegisterName,
+  isValidRegisterEmail,
+  isValidRegisterPassword,
+  registerAdminController,
+);
 
-// module.exports = adminRouter;
+module.exports = adminRouter;
