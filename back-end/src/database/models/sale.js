@@ -38,6 +38,14 @@ const Sale = (sequelize, DataTypes) => {
     underScore: true,
   });
 
+  Sale.associate = (models) => {
+    Sale.belongsTo(models.user, {
+      as: 'users',
+      foreignKey: 'userId',
+      foreignKey: 'sellerId',
+    });
+  };
+
   return Sale;
 };
 

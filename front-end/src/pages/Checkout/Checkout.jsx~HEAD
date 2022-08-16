@@ -30,9 +30,7 @@ function Checkout() {
 
   const submitSale = async (e) => {
     e.preventDefault();
-
-    const { token, id } = JSON.parse(localStorage.getItem('user'));
-
+    const { token } = JSON.parse(localStorage.getItem('user'));
     const res = await fetch(`${process.env.REACT_APP_BASE_URL}/sales`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json', authorization: token },
@@ -41,7 +39,7 @@ function Checkout() {
         deliveryAddress: address,
         deliveryNumber: addressNumber,
         status: 'pendente',
-        userId: id,
+        userId: JSON.parse(localStorage.getItem('user')).id,
         sellerId: selectedSeller.id,
         products,
       }),
