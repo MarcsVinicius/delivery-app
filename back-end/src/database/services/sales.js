@@ -29,13 +29,13 @@ const createSale = async (dataBody) => {
 
   return {
     id: newSale.id,
-    userId: dataBody.userId,
-    sellerId: dataBody.sellerId,
-    totalPrice: dataBody.totalPrice,
-    deliveryAddress: dataBody.deliveryAddress,
-    deliveryNumber: dataBody.deliveryNumber,
+    user_id: dataBody.userId,
+    seller_id: dataBody.sellerId,
+    total_price: dataBody.totalPrice,
+    delivery_address: dataBody.deliveryAddress,
+    delivery_number: dataBody.deliveryNumber,
     status: 'Pendente',
-    saleDate: saleDate,
+    sale_date: saleDate,
   };
 };
 
