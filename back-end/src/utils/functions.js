@@ -10,6 +10,7 @@ const mapedProducts = ({ id, saleDate, status, products, users }) => {
       unityPrice: e.price,
       subTotal: doMath(e.salesProduct.quantity, e.price),
     }));
+    console.log(id);
 
     const result = {
       sale: id,

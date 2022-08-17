@@ -5,7 +5,7 @@ const {
 
 const createSaleController = async (req, res, _next) => {
   const dataBody = req.body;
-
+  
   const newSale = await createSale(dataBody);
   await seedSalesProducts(dataBody, newSale);
 
