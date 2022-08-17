@@ -15,6 +15,7 @@ const registerProcess = async (dataBody) => {
 
   const payload = {
     email,
+    password: encode,
     role: 'customer',
   };
 

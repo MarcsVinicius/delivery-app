@@ -10,6 +10,7 @@ const mapedProducts = ({ id, saleDate, status, products, users, totalPrice }) =>
       unityPrice: e.price,
       subTotal: doMath(e.salesProduct.quantity, e.price),
     }));
+    console.log(id);
 
     const result = {
       sale: id,
@@ -23,7 +24,19 @@ const mapedProducts = ({ id, saleDate, status, products, users, totalPrice }) =>
     return result;
 };
 
+const setRole = (value) => {
+  let role = '';
+  
+  if (value) {
+    role = value;
+  } else {
+    role = 'administrator';
+  }
+  return role;
+};
+
 module.exports = {
   doMath,
   mapedProducts,
+  setRole,
 };
