@@ -15,6 +15,7 @@ const createToken = (email) => {
 
 const decodeToken = (token) => {
   const decoded = verify(token, secret);
+  
   return decoded;
 };
 
