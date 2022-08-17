@@ -3,7 +3,7 @@ const doMath = (quantity, price) => {
   return result.toFixed(2);
 };
 
-const mapedProducts = ({ id, saleDate, status, products, users }) => {
+const mapedProducts = ({ id, saleDate, status, products, users, totalPrice }) => {
   const product = products.map((e) => ({
       productName: e.name,
       quantity: e.salesProduct.quantity,
@@ -17,6 +17,7 @@ const mapedProducts = ({ id, saleDate, status, products, users }) => {
       sellerName: users.name,
       saleDate,
       status,
+      totalPrice,
       products: product,
     };
 

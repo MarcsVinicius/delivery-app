@@ -1,23 +1,31 @@
-const { sale } = require('../models');
+const { sale, user, product, saleProduct } = require('../models');
+const { mapedProducts } = require('../../utils/functions');
 const customError = require('../../utils/customError');
 
 const sellerOrder = async (id) => {
-  const seller = await sale.findOne({ where: { id } });
-
-  if(!seller) {
-    throw customError(400, 'Invalid seller id');
-  }
   const sellerOrders = await sale.findAll(
-    { where: { sellerId: id } }
-  );
+    { where: { sellerId : id } });
 
-  if (sellerOrders.length === 0) {
-    throw customError(200, 'There is no order associated to this seller');
-  }
+    if (sellerOrders.length === 0) {
+      throw customError(200, 'There is no order associated to this seller');
+    }
   
   return sellerOrders;
-}
+};
+
+const sellerOrderDetails = async (id) => {
+  const order = await sale.findOne({ 
+    where: { id },
+    include: [
+      { model: product, as: 'products' },
+      { model: user, as: 'users' }
+    ], });
+
+  const orderDetails = mapedProducts(order);
+  return orderDetails;
+};
 
 module.exports = {
   sellerOrder,
+  sellerOrderDetails
 };

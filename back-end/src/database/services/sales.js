@@ -7,7 +7,7 @@ const seedSalesProducts = async (dataBody, newSale) => {
       await salesProduct.create({
         quantity: e.quantity,
         saleId: newSale.id,
-        productId: e.id,
+        productId: e.productId,
       })
     });
 };
