@@ -15,3 +15,15 @@ export const fetchOrderBySaleId = async (id) => {
   const products = await response.json();
   return products;
 };
+
+export const fetchCustomerOrders = async (userToken) => {
+  const response = await fetch(`${process.env.REACT_APP_BASE_URL}/customer/orders`, {
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: userToken,
+    },
+  });
+
+  const orders = await response.json();
+  return orders;
+};
