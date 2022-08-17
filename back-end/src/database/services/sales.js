@@ -7,7 +7,7 @@ const seedSalesProducts = async (dataBody, newSale) => {
       await salesProduct.create({
         quantity: e.quantity,
         saleId: newSale.id,
-        productId: e.id,
+        productId: e.productId,
       })
     });
 };
@@ -27,13 +27,13 @@ const createSale = async (dataBody) => {
 
   return {
     id: newSale.id,
-    user_id: dataBody.userId,
-    seller_id: dataBody.sellerId,
-    total_price: dataBody.totalPrice,
-    delivery_address: dataBody.deliveryAddress,
-    delivery_number: dataBody.deliveryNumber,
+    userId: dataBody.userId,
+    sellerId: dataBody.sellerId,
+    totalPrice: dataBody.totalPrice,
+    deliveryAddress: dataBody.deliveryAddress,
+    deliveryNumber: dataBody.deliveryNumber,
     status: 'Pendente',
-    sale_date: saleDate,
+    saleDate: saleDate,
   };
 };
 
