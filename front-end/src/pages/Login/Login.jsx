@@ -54,7 +54,13 @@ function Login() {
 
     localStorage.setItem('user', JSON.stringify(loginResponse));
 
-    history.push('/customer/products');
+    if (loginResponse.role === 'seller') {
+      history.push('/seller/orders');
+    }
+
+    if (loginResponse.role === 'customer') {
+      history.push('/customer/products');
+    }
   };
 
   return (
