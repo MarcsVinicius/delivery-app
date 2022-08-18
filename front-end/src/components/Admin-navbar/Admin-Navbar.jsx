@@ -12,7 +12,7 @@ export default function AdminNavbar() {
   };
 
   useEffect(() => {
-    const adminData = JSON.parse(localStorage.getItem('admin')) || {};
+    const adminData = JSON.parse(localStorage.getItem('user')) || {};
     setAdminName(adminData.name);
 
     const isTokenValid = verifyToken(adminData.token);
