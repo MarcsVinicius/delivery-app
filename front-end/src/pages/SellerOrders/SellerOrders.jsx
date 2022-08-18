@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
 import SellerOrderCard from '../../components/SellerOrderCard/SellerOrderCard';
 import { fetchSellerOrders } from '../../helpers/api';
@@ -26,6 +27,8 @@ function SellerOrders() {
       {
         orders.map((order) => <SellerOrderCard orderData={ order } key={ order.id } />)
       }
+
+      <Footer />
 
     </section>
   );

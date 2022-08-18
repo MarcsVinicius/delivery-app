@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../../components/Footer/Footer';
 
 // imported components
 import Navbar from '../../components/Navbar/Navbar';
@@ -13,6 +14,7 @@ function Products() {
       <Provider>
         <ProductList />
       </Provider>
+      <Footer />
 
     </section>
   );

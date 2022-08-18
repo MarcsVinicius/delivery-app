@@ -23,11 +23,17 @@ function Navbar() {
   }, []);
 
   return (
-    <header>
+    <header
+      className="flex items-center justify-between
+    flex-wrap bg-[#F0C808] p-6 text-lg font-bold"
+    >
       {
         userRole === 'customer' ? (
           <>
             <Link
+              className="block mt-4 lg:inline-block lg:mt-0
+              text-stone-900 hover:text-orange-600 mr-4
+               cursor-pointer"
               to="/customer/products"
               data-testid="customer_products__element-navbar-link-products"
             >
@@ -35,6 +41,8 @@ function Navbar() {
             </Link>
 
             <Link
+              className="block mt-4 lg:inline-block lg:mt-0
+              text-stone-900 hover:text-orange-600 cursor-pointer"
               to="/customer/orders"
               data-testid="customer_products__element-navbar-link-orders"
             >
@@ -43,6 +51,8 @@ function Navbar() {
           </>
         ) : (
           <Link
+            className="block mt-4 lg:inline-block lg:mt-0
+            text-stone-900 hover:text-orange-600 mr-4 cursor-pointer"
             to="/seller/orders"
             data-testid="customer_products__element-navbar-link-orders"
           >
@@ -52,12 +62,16 @@ function Navbar() {
       }
 
       <span
+        className="block mt-4 lg:inline-block lg:mt-0
+        text-stone-900 mr-4"
         data-testid="customer_products__element-navbar-user-full-name"
       >
         {userName}
       </span>
 
       <button
+        className="block mt-4 lg:inline-block lg:mt-0
+        text-stone-900 hover:text-orange-600 mr-4 cursor-pointer"
         type="button"
         data-testid="customer_products__element-navbar-link-logout"
         onClick={ handleLogout }

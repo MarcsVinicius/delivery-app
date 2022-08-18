@@ -4,6 +4,7 @@ import { fetchCustomerOrders } from '../../helpers/api';
 
 // imported components
 import OrderCard from '../../components/OrderCard/OrderCard';
+import Footer from '../../components/Footer/Footer';
 
 function Orders() {
   const [orders, setOrders] = useState([]);
@@ -24,6 +25,7 @@ function Orders() {
           orders.map((order) => <OrderCard key={ order.id } orderData={ order } />)
         }
       </section>
+      <Footer />
 
     </section>
   );

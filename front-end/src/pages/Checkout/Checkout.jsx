@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { fetchSellers } from '../../helpers/api';
 import Navbar from '../../components/Navbar/Navbar';
 import TableInfo from '../../components/TableInfo/TableInfo';
+import Footer from '../../components/Footer/Footer';
 
 function Checkout() {
   const [products, setProducts] = useState(localStorage.getItem('products') === null
@@ -148,6 +149,7 @@ function Checkout() {
 
         </button>
       </form>
+      <Footer />
     </section>
   );
 }
