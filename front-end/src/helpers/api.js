@@ -27,3 +27,9 @@ export const fetchCustomerOrders = async (userToken) => {
   const orders = await response.json();
   return orders;
 };
+
+export const fetchSellerOrders = async (id) => {
+  const response = await fetch(`${process.env.REACT_APP_BASE_URL}/seller/${id}`);
+  const orders = await response.json();
+  return orders;
+};
