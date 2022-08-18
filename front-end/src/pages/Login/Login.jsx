@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { MIN_LENGTH_PASSWORD } from '../../helpers/constants';
 import verifyToken from '../../helpers/verifyToken';
+import logo from '../../assets/logo.png';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -65,8 +66,16 @@ function Login() {
 
   return (
     <section
-      className="flex items-center justify-center w-full h-screen bg-[#F0C808]"
+      className="
+        flex items-center justify-center w-full h-screen bg-[#F0C808] flex-col p-4
+      "
     >
+
+      <img
+        src={ logo }
+        alt="logo"
+        className="w-[180px] mb-8 mt-[-100px]"
+      />
 
       <form
         onSubmit={ handleLogin }
@@ -93,6 +102,7 @@ function Login() {
 
         <span
           data-testid="common_login__element-invalid-email"
+          className="text-red-500 font-semibold text-center"
         >
           {errorMessage}
         </span>
@@ -101,6 +111,17 @@ function Login() {
           type="submit"
           data-testid="common_login__button-login"
           disabled={ isButtonDisabled }
+          className="
+            bg-gray-100
+            p-4 rounded-lg
+            font-semibold
+            outline-none
+            disabled:bg-gray-300
+            disabled:text-gray-500
+            font-bold
+            bg-[#07A0C3]
+            text-white
+          "
         >
           Login
         </button>
@@ -109,6 +130,7 @@ function Login() {
           <button
             data-testid="common_login__button-register"
             type="button"
+            className="text-center text-md font-semibold text-gray-600 w-full mt-5"
           >
             Não possui uma conta?
           </button>

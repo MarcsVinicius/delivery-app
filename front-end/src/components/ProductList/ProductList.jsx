@@ -20,7 +20,7 @@ function ProductList() {
   }, [savedProducts]);
 
   return (
-    <section>
+    <section className="flex flex-wrap gap-10 w-full bg-gray-50 p-8 justify-center">
       {
         products.map((product) => (
           <ProductCard
@@ -33,12 +33,29 @@ function ProductList() {
       <button
         type="button"
         data-testid="customer_products__button-cart"
-        style={ { position: 'fixed', right: 0, bottom: 0, margin: '50px' } }
         disabled={ totalPrice === '0,00' }
         onClick={ () => history.push('/customer/checkout') }
+        className="
+          bg-[#F0C808]
+          p-4
+          rounded-xl
+          fixed
+          right-0
+          bottom-0
+          m-10
+          font-bold
+          disabled:bg-gray-300
+          disabled:text-gray-500
+          text-lg
+          flex
+          items-center
+        "
       >
         Ver carrinho: R$
-        <span data-testid="customer_products__checkout-bottom-value">
+        <span
+          data-testid="customer_products__checkout-bottom-value"
+          className="text-3xl ml-2"
+        >
           {totalPrice}
         </span>
       </button>

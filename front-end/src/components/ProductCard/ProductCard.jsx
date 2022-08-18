@@ -49,46 +49,95 @@ function ProductCard({ productData }) {
 
     localStorage.setItem('products', JSON.stringify(savedProducts));
     setSavedProducts(savedProducts);
-  }, [id, productData, setSavedProducts, quantity]);
+  }, [quantity]);
 
   return (
 
-    <section>
-      <img
-        src={ urlImage }
-        data-testid={ `customer_products__img-card-bg-image-${id}` }
-        alt={ `Imagem do produto, ${name}` }
-        style={ { width: '100px' } }
-      />
+    <section
+      className="
+        bg-white
+        w-full
+        max-w-[200px]
+        shadow-md
+        rounded-lg
+        p-5
+        flex
+        flex-col
+        items-center
+        justify-between
+      "
+    >
+      <div className="flex flex-col items-center justify-center h-full">
+        <img
+          src={ urlImage }
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
+          alt={ `Imagem do produto, ${name}` }
+          className="w-[80px]"
+        />
 
-      <h4 data-testid={ `customer_products__element-card-title-${id}` }>
-        {name}
-      </h4>
+        <h4
+          data-testid={ `customer_products__element-card-title-${id}` }
+          className="text-lg font-bold text-center text-gray-700"
+        >
+          {name}
+        </h4>
 
-      <h4 data-testid={ `customer_products__element-card-price-${id}` }>
-        {price.replace('.', ',')}
-      </h4>
+        <h4
+          data-testid={ `customer_products__element-card-price-${id}` }
+          className="
+            text-4xl font-bold text-center flex gap-1 items-end text-gray-800 mt-3
+          "
+        >
+          <span className="text-lg">R$</span>
+          {price.replace('.', ',')}
+        </h4>
+      </div>
 
-      <div>
+      <div className="flex gap-3 mt-5">
         <button
           type="button"
           onClick={ handleRemove }
           data-testid={ `customer_products__button-card-rm-item-${id}` }
+          className={ `
+          ${quantity === 0 ? 'bg-gray-400' : 'bg-[#07A0C3]'}
+          ${quantity === 0 ? '' : 'hover:bg-[#086788]'}
+            w-[30px]
+            h-[30px]
+            flex
+            items-center
+            justify-center
+            text-white
+            font-bold
+            rounded-lg
+          ` }
         >
           -
         </button>
 
         <input
-          type="number"
+          type="text"
           onChange={ handleChange }
           value={ quantity }
           data-testid={ `customer_products__input-card-quantity-${id}` }
+          className="flex-1 w-full text-center text-lg"
         />
 
         <button
           type="button"
           onClick={ () => setQuantity(quantity + 1) }
           data-testid={ `customer_products__button-card-add-item-${id}` }
+          className="
+            bg-[#07A0C3]
+            w-[30px]
+            h-[30px]
+            flex
+            items-center
+            justify-center
+            text-white
+            font-bold
+            rounded-lg
+            hover:bg-[#086788]
+          "
         >
           +
         </button>
