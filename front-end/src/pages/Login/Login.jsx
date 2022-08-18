@@ -68,6 +68,12 @@ function Login() {
     }
     if (loginResponse.role === 'admin') {
       history.push('/admin/manage');
+    if (loginResponse.role === 'seller') {
+      history.push('/seller/orders');
+    }
+
+    if (loginResponse.role === 'customer') {
+      history.push('/customer/products');
     }
   };
 
