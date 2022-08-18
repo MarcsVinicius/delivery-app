@@ -14,7 +14,9 @@ function SellerOrders() {
 
   useEffect(() => {
     if (sellerData) {
-      fetchSellerOrders(sellerData.id).then((response) => setOrders(response));
+      fetchSellerOrders(sellerData.id).then((response) => {
+        if (!response.message) { setOrders(response); }
+      });
     }
   }, [sellerData]);
 
