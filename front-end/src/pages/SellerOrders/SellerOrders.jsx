@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import SellerOrderCard from '../../components/SellerOrderCard/SellerOrderCard';
-import { fetchSellerOrders } from '../../helpers/api';
+import { fetchSellersOrders } from '../../helpers/api';
 
 function SellerOrders() {
   const [sellerData, setSellerData] = useState();
@@ -14,7 +14,9 @@ function SellerOrders() {
 
   useEffect(() => {
     if (sellerData) {
-      fetchSellerOrders(sellerData.id).then((response) => setOrders(response));
+      fetchSellersOrders(sellerData.id).then((response) => {
+        if (!response.message) { setOrders(response); }
+      });
     }
   }, [sellerData]);
 

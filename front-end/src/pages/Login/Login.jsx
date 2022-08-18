@@ -22,7 +22,7 @@ function Login() {
       if (isTokenValid && user.role === 'seller') {
         history.push('/seller/orders');
       }
-      if (isTokenValid && user.role === 'admin') {
+      if (isTokenValid && user.role === 'adminstrator') {
         history.push('/admin/manage');
       }
     }
@@ -66,7 +66,7 @@ function Login() {
     if (loginResponse.role === 'seller') {
       history.push('/seller/orders');
     }
-    if (loginResponse.role === 'admin') {
+    if (loginResponse.role === 'administrator') {
       history.push('/admin/manage');
     }
   };

@@ -39,3 +39,15 @@ export const fetchSellersOrders = async (id) => {
   const products = await response.json();
   return products;
 };
+
+export const fetchAdmin = async (userToken) => {
+  const response = await fetch(`${process.env.REACT_APP_BASE_URL}/admin/manage`, {
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: userToken,
+    },
+  });
+
+  const users = await response.json();
+  return users;
+};
