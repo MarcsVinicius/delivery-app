@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import AdminNavbar from '../../components/Admin-navbar/Admin-Navbar';
+import Navbar from '../../components/Navbar/Navbar';
 
 import { MIN_LENGTH_PASSWORD, MIN_LENGTH_NAME } from '../../helpers/constants';
 
@@ -59,13 +59,13 @@ export default function Admin() {
 
   return (
     <section>
-      <AdminNavbar />
+      <Navbar />
       <form>
 
         <label htmlFor="name">
           Nome
           <input
-            type="name"
+            type="text"
             id="name"
             placeholder="Nome e sobrenome"
             data-testid="admin_manage__input-name"
@@ -77,7 +77,7 @@ export default function Admin() {
         <label htmlFor="email">
           Email
           <input
-            type="email"
+            type="text"
             id="email"
             placeholder="seu-email@site.com.br"
             data-testid="admin_manage__input-email"

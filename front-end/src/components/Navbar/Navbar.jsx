@@ -25,7 +25,7 @@ function Navbar() {
   return (
     <header>
       {
-        userRole === 'customer' ? (
+        userRole === 'customer' && (
           <>
             <Link
               to="/customer/products"
@@ -41,7 +41,10 @@ function Navbar() {
               Meus pedidos
             </Link>
           </>
-        ) : (
+        )
+      }
+      {
+        userRole === 'seller' && (
           <Link
             to="/seller/orders"
             data-testid="customer_products__element-navbar-link-orders"
@@ -50,6 +53,22 @@ function Navbar() {
           </Link>
         )
       }
+
+      { userRole === 'administrator'
+      && (
+        <>
+          <Link
+            to="/admin/manage"
+            data-testid="administrator__element-navbar-link-manager"
+          >
+            Gerenciar Usuários
+          </Link>
+
+          <span>
+            {userName}
+          </span>
+        </>
+      )}
 
       <span
         data-testid="customer_products__element-navbar-user-full-name"

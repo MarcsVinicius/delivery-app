@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 export default function AdminNavbar() {
-  const [adminName, setAdminName] = useState('');
+  const [userName, setUserName] = useState('');
 
   const history = useHistory();
 
@@ -12,26 +12,30 @@ export default function AdminNavbar() {
   };
 
   useEffect(() => {
-    const adminData = JSON.parse(localStorage.getItem('user')) || {};
-    setAdminName(adminData.name);
+    const userData = JSON.parse(localStorage.getItem('user')) || {};
+    setUserName(userData.name);
 
-    const isTokenValid = verifyToken(adminData.token);
+    const isTokenValid = verifyToken(userData.token);
 
     if (!isTokenValid) handleLogout();
   }, []);
 
   return (
     <header>
-      <span>
-        GERENCIAR USUÁRIOS
-      </span>
+      <Link
+        to="/admin/manage"
+        data-testid="administrator__element-navbar-link-manager"
+      >
+        Gerenciar Usuários
+      </Link>
 
       <span>
-        {adminName}
+        {userName}
       </span>
 
       <button
         type="button"
+        data-testid="administrator__element-navbar-link-logout"
         onClick={ handleLogout }
       >
         Sair
