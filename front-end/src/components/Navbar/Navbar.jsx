@@ -16,9 +16,7 @@ function Navbar() {
     const userData = JSON.parse(localStorage.getItem('user')) || {};
     setUserName(userData.name);
     setUserRole(userData.role);
-
     const isTokenValid = verifyToken(userData.token);
-
     if (!isTokenValid) handleLogout();
   }, []);
 
@@ -86,5 +84,6 @@ function Navbar() {
     </header>
   );
 }
+// {role === 'seller' ? history.push('/seller/products') : null}
 
 export default Navbar;

@@ -16,8 +16,14 @@ function Login() {
     if (user) {
       const isTokenValid = verifyToken(user.token);
 
-      if (isTokenValid) {
+      if (isTokenValid && user.role === 'customer') {
         history.push('/customer/products');
+      }
+      if (isTokenValid && user.role === 'seller') {
+        history.push('/seller/orders');
+      }
+      if (isTokenValid && user.role === 'adminstrator') {
+        history.push('/admin/manage');
       }
     }
   }, [history]);
@@ -54,14 +60,12 @@ function Login() {
 
     localStorage.setItem('user', JSON.stringify(loginResponse));
 
-    if (loginResponse.role === 'seller') {
-      history.push('/seller/orders');
-    }
-
     if (loginResponse.role === 'customer') {
       history.push('/customer/products');
     }
-
+    if (loginResponse.role === 'seller') {
+      history.push('/seller/orders');
+    }
     if (loginResponse.role === 'administrator') {
       history.push('/admin/manage');
     }
@@ -114,5 +118,4 @@ function Login() {
     </section>
   );
 }
-
 export default Login;
