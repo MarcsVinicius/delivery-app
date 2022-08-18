@@ -14,24 +14,19 @@ function Navbar() {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem('user')) || {};
     setUserName(userData.name);
+
     const isTokenValid = verifyToken(userData.token);
+
     if (!isTokenValid) handleLogout();
   }, []);
 
   return (
     <header>
       <Link
-        to="/customer/products"
-        data-testid="customer_products__element-navbar-link-products"
-      >
-        Produtos
-      </Link>
-
-      <Link
-        to="/customer/orders"
+        to="/seller/orders"
         data-testid="customer_products__element-navbar-link-orders"
       >
-        Meus pedidos
+        Pedidos
       </Link>
 
       <span
@@ -50,6 +45,5 @@ function Navbar() {
     </header>
   );
 }
-// {role === 'seller' ? history.push('/seller/products') : null}
 
 export default Navbar;

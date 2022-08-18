@@ -25,7 +25,19 @@ const sellerOrderDetails = async (id) => {
   return orderDetails;
 };
 
+const sellerStatusUpdate = async (id, status) => {
+  const order = await sale.findOne({ 
+    where: { id },
+  });
+  order.status = status;
+  order.save();
+  return {
+    message: 'updated!',
+  }
+}
+
 module.exports = {
   sellerOrder,
-  sellerOrderDetails
+  sellerOrderDetails,
+  sellerStatusUpdate
 };
