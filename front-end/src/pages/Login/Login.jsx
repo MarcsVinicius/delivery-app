@@ -64,8 +64,14 @@ function Login() {
   };
 
   return (
-    <section>
-      <form onSubmit={ handleLogin }>
+    <section
+      className="flex items-center justify-center w-full h-screen bg-[#F0C808]"
+    >
+
+      <form
+        onSubmit={ handleLogin }
+        className="bg-white flex flex-col w-full max-w-sm p-6 rounded-lg gap-3 shadow-lg"
+      >
 
         <input
           type="email"
@@ -73,6 +79,7 @@ function Login() {
           data-testid="common_login__input-email"
           value={ email }
           onChange={ ({ target }) => setEmail(target.value) }
+          className="bg-gray-100 p-4 rounded-lg font-semibold outline-none"
         />
 
         <input
@@ -81,6 +88,7 @@ function Login() {
           data-testid="common_login__input-password"
           value={ password }
           onChange={ ({ target }) => setPassword(target.value) }
+          className="bg-gray-100 p-4 rounded-lg font-semibold outline-none"
         />
 
         <span
@@ -107,6 +115,7 @@ function Login() {
         </Link>
 
       </form>
+
     </section>
   );
 }
