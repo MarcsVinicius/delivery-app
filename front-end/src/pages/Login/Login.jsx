@@ -126,8 +126,8 @@ function Login() {
             disabled:bg-gray-300
             disabled:text-gray-500
             font-bold
-            bg-[#07A0C3]
             text-white
+            bg-[#07A0C3]
           "
         >
           Login
