@@ -120,14 +120,13 @@ function Login() {
           data-testid="common_login__button-login"
           disabled={ isButtonDisabled }
           className="
-            bg-gray-100
+            bg-[#07A0C3]
             p-4 rounded-lg
             font-semibold
             outline-none
             disabled:bg-gray-300
             disabled:text-gray-500
             font-bold
-            bg-[#07A0C3]
             text-white
           "
         >
