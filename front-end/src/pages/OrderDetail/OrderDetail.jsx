@@ -91,7 +91,7 @@ export default function OrderDetail() {
                       `customer_order_details__element-order-table-name-${i}`
                     }
                   >
-                    {product.ProductName}
+                    {product.productName}
                   </td>
                   <td
                     data-testid={

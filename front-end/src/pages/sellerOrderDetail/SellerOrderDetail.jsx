@@ -91,7 +91,7 @@ export default function OrderDetail() {
       ) : <h2>Carregando...</h2>}
       <table>
         <thead>
-          <tr>
+          <tr className="grid grid-cols-6 gap-10">
             <th>Item</th>
             <th>Descrição</th>
             <th>Quantidade</th>
@@ -108,11 +108,13 @@ export default function OrderDetail() {
                     `seller_order_details__element-order-table-item-number-${i}`
                   }
                   key={ i }
+                  className="grid grid-cols-5 gap-3"
                 >
                   <td
                     data-testid={
                       `seller_order_details__element-order-table-item-number-${i}`
                     }
+                    className="grid grid-cols-5 gap-3"
                   >
                     <span>
                       {i + 1}
@@ -123,7 +125,7 @@ export default function OrderDetail() {
                       `seller_order_details__element-order-table-name-${i}`
                     }
                   >
-                    {product.ProductName}
+                    {product.productName}
                   </td>
                   <td
                     data-testid={
