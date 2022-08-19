@@ -16,9 +16,7 @@ function Navbar() {
     const userData = JSON.parse(localStorage.getItem('user')) || {};
     setUserName(userData.name);
     setUserRole(userData.role);
-
     const isTokenValid = verifyToken(userData.token);
-
     if (!isTokenValid) handleLogout();
   }, []);
 
@@ -28,7 +26,7 @@ function Navbar() {
     flex-wrap bg-[#F0C808] p-6 text-lg font-bold"
     >
       {
-        userRole === 'customer' ? (
+        userRole === 'customer' && (
           <>
             <Link
               className="block mt-4 lg:inline-block lg:mt-0
@@ -49,7 +47,10 @@ function Navbar() {
               Meus pedidos
             </Link>
           </>
-        ) : (
+        )
+      }
+      {
+        userRole === 'seller' && (
           <Link
             className="block mt-4 lg:inline-block lg:mt-0
             text-stone-900 hover:text-orange-600 mr-4 cursor-pointer"
@@ -60,6 +61,22 @@ function Navbar() {
           </Link>
         )
       }
+
+      { userRole === 'administrator'
+      && (
+        <>
+          <Link
+            to="/admin/manage"
+            data-testid="administrator__element-navbar-link-manager"
+          >
+            Gerenciar Usuários
+          </Link>
+
+          <span>
+            {userName}
+          </span>
+        </>
+      )}
 
       <span
         className="block mt-4 lg:inline-block lg:mt-0
@@ -81,5 +98,6 @@ function Navbar() {
     </header>
   );
 }
+// {role === 'seller' ? history.push('/seller/products') : null}
 
 export default Navbar;

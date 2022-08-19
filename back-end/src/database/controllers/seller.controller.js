@@ -22,7 +22,18 @@ const sellerOrderDetails = async (req, res, next) => {
   }
 }
 
+const sellerStatusUpdate = async (req, res, next) => {
+  try {
+   const { status, saleId } = req.body;
+   const newStatus = await sellerService.sellerStatusUpdate(saleId, status);
+   return res.status(200).json(newStatus);
+  }catch(err) {
+    next(err)
+  }
+}
+
 module.exports = {
   sellerOrder,
   sellerOrderDetails,
+  sellerStatusUpdate
 };

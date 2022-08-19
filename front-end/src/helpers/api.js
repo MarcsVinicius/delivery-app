@@ -16,6 +16,13 @@ export const fetchOrderBySaleId = async (id) => {
   return products;
 };
 
+export const fetchSellerOrderDetail = async (sellerId, saleId) => {
+  const response = await
+  fetch(`${process.env.REACT_APP_BASE_URL}/seller/${sellerId}/orders/${saleId}`);
+  const products = await response.json();
+  return products;
+};
+
 export const fetchCustomerOrders = async (userToken) => {
   const response = await fetch(`${process.env.REACT_APP_BASE_URL}/customer/orders`, {
     headers: {
@@ -27,9 +34,20 @@ export const fetchCustomerOrders = async (userToken) => {
   const orders = await response.json();
   return orders;
 };
-
-export const fetchSellerOrders = async (id) => {
+export const fetchSellersOrders = async (id) => {
   const response = await fetch(`${process.env.REACT_APP_BASE_URL}/seller/${id}`);
-  const orders = await response.json();
-  return orders;
+  const products = await response.json();
+  return products;
+};
+
+export const fetchAdmin = async (userToken) => {
+  const response = await fetch(`${process.env.REACT_APP_BASE_URL}/admin/manage`, {
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: userToken,
+    },
+  });
+
+  const users = await response.json();
+  return users;
 };

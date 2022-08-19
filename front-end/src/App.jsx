@@ -9,7 +9,9 @@ import Products from './pages/Products/Products';
 import Checkout from './pages/Checkout/Checkout';
 import OrderDetail from './pages/OrderDetail/OrderDetail';
 import Orders from './pages/Orders/Orders';
+import SellerOrderDetail from './pages/sellerOrderDetail/SellerOrderDetail';
 import SellerOrders from './pages/SellerOrders/SellerOrders';
+import Admin from './pages/Admin/Admin';
 
 function App() {
   return (
@@ -22,6 +24,12 @@ function App() {
       <Route exact path="/customer/orders" component={ Orders } />
       <Route exact path="/customer/checkout" component={ Checkout } />
       <Route exact path="/seller/orders" component={ SellerOrders } />
+      <Route
+        exact
+        path="/seller/orders/:orderId"
+        component={ SellerOrderDetail }
+      />
+      <Route exact path="/admin/manage" component={ Admin } />
     </Switch>
   );
 }
