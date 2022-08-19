@@ -109,7 +109,6 @@ export default function Login() {
           disabled={ isButtonDisabled }
           onClick={ handleRegister }
           className="
-            bg-gray-100
             p-4 rounded-lg
             font-semibold
             outline-none
